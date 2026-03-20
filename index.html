@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Idioms Unit 11-19</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab, #c471f5, #fa709a);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .sparkle {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: sparkle 3s linear infinite;
+            box-shadow: 0 0 20px #fff, 0 0 40px #fff, 0 0 60px #ff00de;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 
+                        inset 0 0 60px rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        h1 {
+            text-align: center;
+            background: linear-gradient(45deg, #ff00cc, #3333ff, #00ccff, #ff00cc);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientText 5s ease infinite;
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 0 0 30px rgba(255, 0, 204, 0.5);
+            position: relative;
+        }
+
+        @keyframes gradientText {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.2em;
+        }
+
+        .task-section {
+            margin-bottom: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .task-section::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #ff00cc, #3333ff, #00ccff);
+        }
+
+        .task-title {
+            font-size: 1.8em;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .task-number {
+            background: linear-gradient(45deg, #ff00cc, #3333ff);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7em;
+            box-shadow: 0 5px 15px rgba(255, 0, 204, 0.4);
+        }
+
+        .question {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .question:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .question-text {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            font-style: italic;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option-btn {
+            padding: 15px 20px;
+            border: 3px solid transparent;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+            font-weight: 500;
+        }
+
+        .option-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .option-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .option-btn:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.5);
+        }
+
+        .option-btn.correct {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            border-color: #38ef7d;
+            animation: correctPulse 0.6s ease;
+        }
+
+        .option-btn.wrong {
+            background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%);
+            border-color: #eb3349;
+            animation: shake 0.5s ease;
+        }
+
+        @keyframes correctPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .translation-input {
+            width: 100%;
+            padding: 15px;
+            border: 3px solid #ddd;
+            border-radius: 12px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .translation-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .check-btn {
+            margin-top: 15px;
+            padding: 15px 40px;
+            background: linear-gradient(45deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1em;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 10px 25px rgba(245, 87, 108, 0.4);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .check-btn::after {
+            content: '✨';
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            animation: sparkle2 2s infinite;
+        }
+
+        @keyframes sparkle2 {
+            0%, 100% { opacity: 1; transform: translateY(-50%) scale(1); }
+            50% { opacity: 0.5; transform: translateY(-50%) scale(1.2); }
+        }
+
+        .check-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(245, 87, 108, 0.6);
+        }
+
+        .check-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .result-message {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: 600;
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .result-message.correct {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            display: block;
+        }
+
+        .result-message.wrong {
+            background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%);
+            color: white;
+            display: block;
+        }
+
+        .score-display {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 15px;
+            font-size: 1.3em;
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(400px); }
+            to { transform: translateX(0); }
+        }
+
+        .final-score {
+            text-align: center;
+            font-size: 2em;
+            margin-top: 30px;
+            padding: 30px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border-radius: 20px;
+            display: none;
+            box-shadow: 0 15px 40px rgba(245, 87, 108, 0.4);
+        }
+
+        .final-score.show {
+            display: block;
+            animation: bounceIn 0.8s ease;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .russian-text {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2em; }
+            .container { padding: 20px; }
+            .score-display { 
+                position: relative; 
+                top: 0; 
+                right: 0; 
+                margin-bottom: 20px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="score-display">
+        Score: <span id="score">0</span> / <span id="total">0</span>
+    </div>
+
+    <div class="container">
+        <h1>✨ Idioms Unit 11-19 ✨</h1>
+        <p class="subtitle">Test your knowledge of English idioms!</p>
+
+        <!-- Task 1: Multiple Choice -->
+        <div class="task-section">
+            <div class="task-title">
+                <span class="task-number">1</span>
+                Choose the correct idiom
+            </div>
+            <div id="task1-questions"></div>
+        </div>
+
+        <!-- Task 2: Translation -->
+        <div class="task-section">
+            <div class="task-title">
+                <span class="task-number">2</span>
+                Translate from Russian to English
+            </div>
+            <div id="task2-questions"></div>
+        </div>
+
+        <div class="final-score" id="finalScore"></div>
+    </div>
+
+    <script>
+        // Quiz Data - Definitions from textbook images
+        const task1Questions = [
+            {
+                definition: "INF spend an unusually large sum of money on sth",
+                correct: "splash out",
+                options: ["splash out", "put aside", "pay off"]
+            },
+            {
+                definition: "very poor; with very little money to live on",
+                correct: "on the breadline",
+                options: ["on the breadline", "in the lap of luxury", "going cheap"]
+            },
+            {
+                definition: "INF spend a lot of money on sth, usually money you don't want to",
+                correct: "fork out",
+                options: ["fork out", "splash out", "cut corners"]
+            },
+            {
+                definition: "INF be available at a lower price than usual",
+                correct: "going cheap",
+                options: ["going cheap", "not come cheap", "the going rate"]
+            },
+            {
+                definition: "INF feel or look very ill or tired",
+                correct: "feel/look like death warmed up",
+                options: ["feel/look like death warmed up", "full of beans", "on the mend"]
+            },
+            {
+                definition: "(of a pain, feeling, or effect) gradually disappear or stop",
+                correct: "wear off",
+                options: ["wear off", "swell up", "come out in"]
+            },
+            {
+                definition: "INF fall over, especially when you feel ill",
+                correct: "keel over",
+                options: ["keel over", "pass out", "throw up"]
+            },
+            {
+                definition: "INF catch an infectious illness",
+                correct: "pick up",
+                options: ["pick up", "wear off", "pull through"]
+            },
+            {
+                definition: "relax and avoid working hard or doing too much",
+                correct: "take things easy",
+                options: ["take things easy", "throw your weight around", "go downhill"]
+            },
+            {
+                definition: "INF getting better after an illness or injury",
+                correct: "on the mend",
+                options: ["on the mend", "go downhill", "feel out of sorts"]
+            },
+            {
+                definition: "INF it's very uncertain whether sth will happen or not",
+                correct: "touch-and-go",
+                options: ["touch-and-go", "better safe than sorry", "on the safe side"]
+            },
+            {
+                definition: "succeed in doing sth with difficulty, especially passing an exam",
+                correct: "scrape through",
+                options: ["scrape through", "with flying colours", "turn over a new leaf"]
+            },
+            {
+                definition: "very well; with a very high mark/grade",
+                correct: "with flying colours",
+                options: ["with flying colours", "scrape through", "next to nothing"]
+            },
+            {
+                definition: "start working more effectively or faster",
+                correct: "step up a gear",
+                options: ["step up a gear", "run out of steam", "go off the rails"]
+            },
+            {
+                definition: "give (sb/sth) permission to start sth",
+                correct: "give the green light",
+                options: ["give the green light", "tick over", "in top gear"]
+            },
+            {
+                definition: "lose your energy and enthusiasm",
+                correct: "run out of steam",
+                options: ["run out of steam", "step up a gear", "move up a gear"]
+            },
+            {
+                definition: "INF start behaving in a wild or unacceptable way",
+                correct: "go off the rails",
+                options: ["go off the rails", "keep your feet on the ground", "on the road"]
+            },
+            {
+                definition: "having a lot of energy",
+                correct: "full of beans",
+                options: ["full of beans", "feel like death warmed up", "run out of steam"]
+            },
+            {
+                definition: "INF be involved and influential in a lot of different activities",
+                correct: "have a finger in every pie",
+                options: ["have a finger in every pie", "go it alone", "part of the furniture"]
+            },
+            {
+                definition: "be embarrassed because sth you tried to do went wrong",
+                correct: "have egg on your face",
+                options: ["have egg on your face", "butter wouldn't melt", "make your mouth water"]
+            },
+            {
+                definition: "try to do too much or do sth that is too difficult",
+                correct: "bite off more than you can chew",
+                options: ["bite off more than you can chew", "eat like a horse", "pick at"]
+            },
+            {
+                definition: "INF a person who spends too much time watching TV",
+                correct: "couch potato",
+                options: ["couch potato", "full of beans", "part of the furniture"]
+            },
+            {
+                definition: "waste time worrying about sth that has already happened and that cannot be changed",
+                correct: "cry over spilt milk",
+                options: ["cry over spilt milk", "make your mouth water", "polish off"]
+            },
+            {
+                definition: "used to say that sb has a lot of money and can buy what they want in the easy and comfortable conditions that result from being wealthy",
+                correct: "in the lap of luxury",
+                options: ["in the lap of luxury", "on the breadline", "live from hand to mouth"]
+            },
+            {
+                definition: "spend more money than you earn",
+                correct: "live beyond your means",
+                options: ["live beyond your means", "put aside", "pay off"]
+            },
+            {
+                definition: "have just enough money or food to stay alive",
+                correct: "live from hand to mouth",
+                options: ["live from hand to mouth", "splash out", "in the lap of luxury"]
+            },
+            {
+                definition: "save or keep sth for future use",
+                correct: "put aside",
+                options: ["put aside", "fork out", "splash out"]
+            },
+            {
+                definition: "pay some money to reserve sth, before paying for it in full",
+                correct: "put down a deposit",
+                options: ["put down a deposit", "pay off", "settle up"]
+            },
+            {
+                definition: "If you are in arrears with your rent or other payments, you are late paying the money that you owe",
+                correct: "be in arrears",
+                options: ["be in arrears", "pay your way", "cut corners"]
+            },
+            {
+                definition: "finish paying money that is owed for sth",
+                correct: "pay off",
+                options: ["pay off", "fork out", "put down a deposit"]
+            },
+            {
+                definition: "pay for everything yourself without relying on others",
+                correct: "pay your own way",
+                options: ["pay your own way", "be in arrears", "bail out"]
+            },
+            {
+                definition: "rescue sb from a difficult situation, usually with money",
+                correct: "bail out",
+                options: ["bail out", "pay your way", "go to the wall"]
+            },
+            {
+                definition: "INF (of an organization) fail because of lack of money",
+                correct: "go to the wall",
+                options: ["go to the wall", "be going strong", "make a comeback"]
+            },
+            {
+                definition: "DISAPPROVING do sth in the easiest, cheapest, or quickest way in order to save time or money",
+                correct: "cut corners",
+                options: ["cut corners", "pay off", "plough back"]
+            },
+            {
+                definition: "INF be doing well and being successful",
+                correct: "be going strong",
+                options: ["be going strong", "go to the wall", "hang in the balance"]
+            },
+            {
+                definition: "If sth makes a comeback, it becomes popular and successful again",
+                correct: "make a comeback",
+                options: ["make a comeback", "go to the wall", "fall through"]
+            },
+            {
+                definition: "(used with time, age, distance, etc.) almost; very nearly",
+                correct: "close on",
+                options: ["close on", "miles from anywhere", "as the crow flies"]
+            },
+            {
+                definition: "A person who is part of the furniture is so familiar to you that you no longer notice them",
+                correct: "part of the furniture",
+                options: ["part of the furniture", "have a finger in every pie", "make a name"]
+            },
+            {
+                definition: "look after sb who has less experience than you",
+                correct: "take under your wing",
+                options: ["take under your wing", "throw your weight around", "get the push"]
+            },
+            {
+                definition: "the clever ways of doing things in a particular job",
+                correct: "the tricks of the trade",
+                options: ["the tricks of the trade", "the going rate", "a matter of"]
+            },
+            {
+                definition: "There are several informal idioms that mean to be dismissed from a job",
+                correct: "get the push/boot/elbow",
+                options: ["get the push/boot/elbow", "get your foot in the door", "take in your stride"]
+            },
+            {
+                definition: "get your first opportunity to work for an organization or business",
+                correct: "get your foot in the door",
+                options: ["get your foot in the door", "get the push", "go it alone"]
+            },
+            {
+                definition: "accept and deal with sth difficult without letting it worry you",
+                correct: "take in your stride",
+                options: ["take in your stride", "bite off more than you can chew", "rest on your laurels"]
+            },
+            {
+                definition: "rely on only one thing for success, having no other possibilities if sth goes wrong",
+                correct: "put all your eggs in one basket",
+                options: ["put all your eggs in one basket", "keep your feet on the ground", "pin your hopes on"]
+            },
+            {
+                definition: "make sure you find out about recent developments in a particular area by talking in an informal way to other people",
+                correct: "keep your ear to the ground",
+                options: ["keep your ear to the ground", "on the grapevine", "make a name"]
+            },
+            {
+                definition: "become well known and respected by many people",
+                correct: "make a name for yourself",
+                options: ["make a name for yourself", "part of the furniture", "go it alone"]
+            },
+            {
+                definition: "have a sensible and realistic attitude",
+                correct: "keep your feet on the ground",
+                options: ["keep your feet on the ground", "go off the rails", "run out of steam"]
+            },
+            {
+                definition: "travel from one place to another in a straight line",
+                correct: "as the crow flies",
+                options: ["as the crow flies", "at a snail's pace", "miles from anywhere"]
+            },
+            {
+                definition: "INF in the countryside, a long way from a town",
+                correct: "miles from anywhere",
+                options: ["miles from anywhere", "close on", "as the crow flies"]
+            },
+            {
+                definition: "very slowly",
+                correct: "at a snail's pace",
+                options: ["at a snail's pace", "as the crow flies", "in top gear"]
+            }
+        ];
+
+        // Task 2: Translation questions
+        const task2Questions = [
+            { russian: "жить не по средствам", answer: "live beyond your means" },
+            { russian: "выкладывать деньги", answer: "fork out" },
+            { russian: "подхватить болезнь", answer: "pick up" },
+            { russian: "висеть на волоске", answer: "hang in the balance" },
+            { russian: "на всякий случай", answer: "to be on the safe side" },
+            { russian: "почивать на лаврах", answer: "rest on your laurels" },
+            { russian: "держать руку на пульсе", answer: "keep your ear to the ground" },
+            { russian: "в последнюю минуту", answer: "at the eleventh hour" },
+            { russian: "выручать кого-то", answer: "bail out" },
+            { russian: "быть на шаг впереди", answer: "keep one step ahead" },
+            { russian: "откладывать деньги", answer: "put aside" },
+            { russian: "расплатиться", answer: "settle up" },
+            { russian: "иметь задолженность", answer: "be in arrears" },
+            { russian: "внести депозит", answer: "put down a deposit" },
+            { russian: "дать зелёный свет", answer: "give the green light" },
+            { russian: "сбиться с пути", answer: "go off the rails" },
+            { russian: "выдохнуться", answer: "run out of steam" },
+            { russian: "стоять на земле", answer: "keep your feet on the ground" },
+            { russian: "возлагать надежды", answer: "pin your hopes on" },
+            { russian: "действовать в одиночку", answer: "go it alone" },
+            { russian: "быть вовлечённым", answer: "be caught up in" },
+            { russian: "оглядываясь назад", answer: "in retrospect" },
+            { russian: "наводнить рынок", answer: "flood the market" },
+            { russian: "срезать углы", answer: "cut corners" },
+            { russian: "ограничить потери", answer: "cut your losses" },
+            { russian: "быть очень дорогим", answer: "cost an arm and a leg" },
+            { russian: "выглядеть очень плохо", answer: "feel like death warmed up" },
+            { russian: "проходить (о боли)", answer: "wear off" },
+            { russian: "терять сознание", answer: "pass out" },
+            { russian: "расслабиться", answer: "take things easy" },
+            { russian: "поправляться", answer: "be on the mend" },
+            { russian: "под вопросом", answer: "touch-and-go" },
+            { russian: "еле пройти", answer: "scrape through" },
+            { russian: "с блеском", answer: "with flying colours" },
+            { russian: "ускориться", answer: "step up a gear" },
+            { russian: "на полной скорости", answer: "in top gear" },
+            { russian: "работать на холостом ходу", answer: "tick over" },
+            { russian: "быть очень энергичным", answer: "full of beans" },
+            { russian: "быть в курсе всего", answer: "have a finger in every pie" },
+            { russian: "опозориться", answer: "have egg on your face" },
+            { russian: "брать слишком много", answer: "bite off more than you can chew" },
+            { russian: "лежебока", answer: "couch potato" },
+            { russian: "плакать над пролитым молоком", answer: "cry over spilt milk" },
+            { russian: "в роскоши", answer: "in the lap of luxury" },
+            { russian: "жить от зарплаты до зарплаты", answer: "live from hand to mouth" }
+        ];
+
+        let score = 0;
+        let answeredQuestions = new Set();
+
+        // Initialize Task 1
+        function initTask1() {
+            const container = document.getElementById('task1-questions');
+            task1Questions.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                questionDiv.innerHTML = `
+                    <div class="question-text">${index + 1}. ${q.definition}</div>
+                    <div class="options">
+                        ${q.options.map((opt, i) => `
+                            <button class="option-btn" onclick="checkAnswer1(${index}, '${opt.replace(/'/g, "\\'")}', this)">
+                                ${String.fromCharCode(65 + i)}. ${opt}
+                            </button>
+                        `).join('')}
+                    </div>
+                    <div class="result-message" id="result1-${index}"></div>
+                `;
+                container.appendChild(questionDiv);
+            });
+            document.getElementById('total').textContent = task1Questions.length + task2Questions.length;
+        }
+
+        function checkAnswer1(questionIndex, selectedAnswer, btnElement) {
+            if (answeredQuestions.has(`1-${questionIndex}`)) return;
+            
+            const question = task1Questions[questionIndex];
+            const resultDiv = document.getElementById(`result1-${questionIndex}`);
+            const buttons = btnElement.parentElement.querySelectorAll('.option-btn');
+            
+            answeredQuestions.add(`1-${questionIndex}`);
+            
+            buttons.forEach(btn => {
+                btn.disabled = true;
+                btn.style.cursor = 'not-allowed';
+                if (btn.textContent.includes(question.correct)) {
+                    btn.classList.add('correct');
+                }
+            });
+            
+            if (selectedAnswer === question.correct) {
+                score++;
+                document.getElementById('score').textContent = score;
+                resultDiv.textContent = '✅ Correct! Well done!';
+                resultDiv.className = 'result-message correct';
+            } else {
+                btnElement.classList.add('wrong');
+                resultDiv.textContent = `❌ Wrong! The correct answer is: ${question.correct}`;
+                resultDiv.className = 'result-message wrong';
+            }
+            
+            checkCompletion();
+        }
+
+        // Initialize Task 2
+        function initTask2() {
+            const container = document.getElementById('task2-questions');
+            task2Questions.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                questionDiv.innerHTML = `
+                    <div class="question-text">${index + 1}. Translate:</div>
+                    <div class="russian-text">${q.russian}</div>
+                    <input type="text" class="translation-input" id="input2-${index}" placeholder="Enter the English idiom...">
+                    <button class="check-btn" onclick="checkAnswer2(${index}, '${q.answer.replace(/'/g, "\\'")}')">
+                        Check Answer
+                    </button>
+                    <div class="result-message" id="result2-${index}"></div>
+                `;
+                container.appendChild(questionDiv);
+            });
+        }
+
+        function checkAnswer2(questionIndex, correctAnswer) {
+            if (answeredQuestions.has(`2-${questionIndex}`)) return;
+            
+            const input = document.getElementById(`input2-${questionIndex}`);
+            const userAnswer = input.value.trim().toLowerCase();
+            const resultDiv = document.getElementById(`result2-${questionIndex}`);
+            
+            answeredQuestions.add(`2-${questionIndex}`);
+            
+            input.disabled = true;
+            input.parentElement.querySelector('.check-btn').disabled = true;
+            
+            if (userAnswer === correctAnswer.toLowerCase()) {
+                score++;
+                document.getElementById('score').textContent = score;
+                resultDiv.textContent = `✅ Correct! The answer is: ${correctAnswer}`;
+                resultDiv.className = 'result-message correct';
+                input.style.borderColor = '#38ef7d';
+            } else {
+                resultDiv.textContent = `❌ Wrong! The correct answer is: ${correctAnswer}`;
+                resultDiv.className = 'result-message wrong';
+                input.style.borderColor = '#eb3349';
+            }
+            
+            checkCompletion();
+        }
+
+        function checkCompletion() {
+            if (answeredQuestions.size === task1Questions.length + task2Questions.length) {
+                setTimeout(() => {
+                    const finalScoreDiv = document.getElementById('finalScore');
+                    const percentage = Math.round((score / (task1Questions.length + task2Questions.length)) * 100);
+                    let message = '';
+                    
+                    if (percentage >= 90) message = '🌟 Outstanding! You\'re an idiom master!';
+                    else if (percentage >= 70) message = '👏 Great job! Keep up the good work!';
+                    else if (percentage >= 50) message = '👍 Good effort! Keep practicing!';
+                    else message = '📚 Keep studying! You\'ll get better!';
+                    
+                    finalScoreDiv.innerHTML = `
+                        <div style="font-size: 0.8em; margin-bottom: 10px;">Your Final Score</div>
+                        <div style="font-size: 1.5em; margin-bottom: 10px;">${score} / ${task1Questions.length + task2Questions.length}</div>
+                        <div style="font-size: 0.7em;">${percentage}%</div>
+                        <div style="margin-top: 20px; font-size: 0.6em;">${message}</div>
+                    `;
+                    finalScoreDiv.classList.add('show');
+                    
+                    createCelebration();
+                }, 1000);
+            }
+        }
+
+        function createCelebration() {
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const sparkle = document.createElement('div');
+                    sparkle.className = 'sparkle';
+                    sparkle.style.left = Math.random() * 100 + 'vw';
+                    sparkle.style.top = Math.random() * 100 + 'vh';
+                    sparkle.style.animationDelay = Math.random() * 2 + 's';
+                    document.body.appendChild(sparkle);
+                    
+                    setTimeout(() => sparkle.remove(), 3000);
+                }, i * 50);
+            }
+        }
+
+        function createBackgroundSparkles() {
+            setInterval(() => {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.left = Math.random() * 100 + 'vw';
+                sparkle.style.top = Math.random() * 100 + 'vh';
+                sparkle.style.width = Math.random() * 10 + 5 + 'px';
+                sparkle.style.height = sparkle.style.width;
+                document.body.appendChild(sparkle);
+                
+                setTimeout(() => sparkle.remove(), 3000);
+            }, 500);
+        }
+
+        window.onload = function() {
+            initTask1();
+            initTask2();
+            createBackgroundSparkles();
+        };
+    </script>
+</body>
+</html>
