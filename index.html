@@ -3,264 +3,209 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Idioms Unit 11-19</title>
+    <title>Neon Idioms Master</title>
     <style>
+        :root {
+            --neon-blue: #00f3ff;
+            --neon-pink: #ff00ff;
+            --neon-purple: #bc13fe;
+            --neon-green: #0aff00;
+            --bg-dark: #050510;
+            --card-bg: rgba(20, 20, 40, 0.8);
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab, #c471f5, #fa709a);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(188, 19, 254, 0.2) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(0, 243, 255, 0.2) 0%, transparent 20%);
+            color: white;
             min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             padding: 20px;
-            position: relative;
             overflow-x: hidden;
         }
 
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .sparkle {
+        /* Floating particles */
+        .particle {
             position: fixed;
-            width: 10px;
-            height: 10px;
-            background: white;
+            width: 4px;
+            height: 4px;
+            background: var(--neon-blue);
             border-radius: 50%;
             pointer-events: none;
-            animation: sparkle 3s linear infinite;
-            box-shadow: 0 0 20px #fff, 0 0 40px #fff, 0 0 60px #ff00de;
+            animation: float 10s linear infinite;
+            box-shadow: 0 0 10px var(--neon-blue);
         }
 
-        @keyframes sparkle {
-            0%, 100% { opacity: 0; transform: scale(0); }
-            50% { opacity: 1; transform: scale(1); }
+        @keyframes float {
+            0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(-100px) translateX(100px); opacity: 0; }
         }
 
         .container {
-            max-width: 900px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 30px;
-            padding: 40px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), inset 0 0 60px rgba(255, 255, 255, 0.5);
+            width: 100%;
+            max-width: 800px;
+            background: var(--card-bg);
+            border: 2px solid var(--neon-purple);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 0 30px rgba(188, 19, 254, 0.3);
             backdrop-filter: blur(10px);
             position: relative;
             overflow: hidden;
         }
 
-        .container::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transform: rotate(45deg);
-            animation: shimmer 3s infinite;
-        }
-
-        @keyframes shimmer {
-            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
-        }
-
         h1 {
             text-align: center;
-            background: linear-gradient(45deg, #ff00cc, #3333ff, #00ccff, #ff00cc);
-            background-size: 300% 300%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: gradientText 5s ease infinite;
-            font-size: 3em;
-            margin-bottom: 10px;
-            text-shadow: 0 0 30px rgba(255, 0, 204, 0.5);
-            position: relative;
-        }
-
-        @keyframes gradientText {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        .subtitle {
-            text-align: center;
-            color: #666;
+            font-size: 2.5em;
             margin-bottom: 20px;
-            font-size: 1.2em;
-        }
-
-        /* Progress Bar */
-        .progress-container {
-            margin-bottom: 30px;
-            padding: 15px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .progress-info {
-            display: flex;
-            justify-content: space-between;
             color: white;
-            font-weight: 600;
+            text-shadow: 
+                0 0 5px var(--neon-pink),
+                0 0 10px var(--neon-pink),
+                0 0 20px var(--neon-purple);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 5px var(--neon-pink), 0 0 10px var(--neon-pink); }
+            to { text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue); }
+        }
+
+        /* Menu Styles */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stage-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--neon-blue);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .stage-card:hover {
+            background: rgba(0, 243, 255, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.4);
+        }
+
+        .stage-title {
+            font-size: 1.5em;
             margin-bottom: 10px;
-            font-size: 0.95em;
+            color: var(--neon-blue);
+        }
+
+        .stage-desc {
+            font-size: 0.9em;
+            color: #aaa;
+        }
+
+        .block-selector {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .block-btn {
+            background: transparent;
+            border: 2px solid var(--neon-pink);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .block-btn:hover, .block-btn.active {
+            background: var(--neon-pink);
+            box-shadow: 0 0 15px var(--neon-pink);
+        }
+
+        /* Game Area */
+        .game-area {
+            display: none;
         }
 
         .progress-bar {
-            height: 12px;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 10px;
+            width: 100%;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            margin-bottom: 20px;
             overflow: hidden;
-            position: relative;
         }
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #00f260, #0575e6, #00f260);
-            background-size: 200% 100%;
-            animation: progressGlow 2s linear infinite;
-            border-radius: 10px;
-            transition: width 0.5s ease;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
             width: 0%;
+            transition: width 0.5s;
         }
 
-        @keyframes progressGlow {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 200% 50%; }
-        }
-
-        .task-section {
-            margin-bottom: 40px;
-            padding: 30px;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .task-section::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background: linear-gradient(90deg, #ff00cc, #3333ff, #00ccff);
-        }
-
-        .task-title {
-            font-size: 1.8em;
-            color: #333;
-            margin-bottom: 20px;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .task-number {
-            background: linear-gradient(45deg, #ff00cc, #3333ff);
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7em;
-            box-shadow: 0 5px 15px rgba(255, 0, 204, 0.4);
-        }
-
-        .question {
-            background: white;
-            padding: 20px;
-            margin-bottom: 20px;
+        .question-card {
+            background: rgba(0, 0, 0, 0.3);
             border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            position: relative;
+            padding: 25px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .question:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        .definition {
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            line-height: 1.5;
+            color: #fff;
         }
 
-        .question-text {
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 15px;
-            font-size: 1.1em;
-            font-style: italic;
-        }
-
-        .options {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
+        .options-grid {
+            display: grid;
+            gap: 15px;
         }
 
         .option-btn {
-            padding: 15px 20px;
-            border: 3px solid transparent;
-            border-radius: 12px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid var(--neon-blue);
             color: white;
-            font-size: 1em;
+            padding: 15px;
+            border-radius: 10px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            font-size: 1.1em;
+            transition: all 0.2s;
             text-align: left;
-            position: relative;
-            overflow: hidden;
-            font-weight: 500;
-        }
-
-        .option-btn::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
-
-        .option-btn:hover::before {
-            width: 300px;
-            height: 300px;
         }
 
         .option-btn:hover {
-            transform: translateX(10px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.5);
+            background: rgba(0, 243, 255, 0.1);
         }
 
         .option-btn.correct {
-            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-            border-color: #38ef7d;
-            animation: correctPulse 0.6s ease;
+            background: var(--neon-green);
+            border-color: var(--neon-green);
+            color: black;
+            box-shadow: 0 0 20px var(--neon-green);
         }
 
         .option-btn.wrong {
-            background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%);
-            border-color: #eb3349;
-            animation: shake 0.5s ease;
-        }
-
-        @keyframes correctPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            background: var(--neon-pink);
+            border-color: var(--neon-pink);
+            animation: shake 0.5s;
         }
 
         @keyframes shake {
@@ -269,319 +214,320 @@
             75% { transform: translateX(10px); }
         }
 
-        .result-message {
-            margin-top: 15px;
-            padding: 15px;
-            border-radius: 10px;
-            font-weight: 600;
-            display: none;
-            animation: fadeIn 0.5s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .result-message.correct {
-            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-            color: white;
-            display: block;
-        }
-
-        .result-message.wrong {
-            background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%);
-            color: white;
-            display: block;
-        }
-
-        .score-display {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px 30px;
-            border-radius: 15px;
-            font-size: 1.3em;
-            font-weight: bold;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            z-index: 1000;
-            animation: slideIn 0.5s ease;
-        }
-
-        @keyframes slideIn {
-            from { transform: translateX(400px); }
-            to { transform: translateX(0); }
-        }
-
-        .final-score {
+        .feedback {
             text-align: center;
-            font-size: 2em;
-            margin-top: 30px;
-            padding: 30px;
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
-            border-radius: 20px;
-            display: none;
-            box-shadow: 0 15px 40px rgba(245, 87, 108, 0.4);
+            margin-top: 15px;
+            font-size: 1.2em;
+            font-weight: bold;
+            min-height: 30px;
         }
 
-        .final-score.show {
-            display: block;
-            animation: bounceIn 0.8s ease;
+        .feedback.try-again { color: var(--neon-pink); }
+        .feedback.success { color: var(--neon-green); }
+
+        /* Stage 2 Specific */
+        .translation-card {
+            text-align: center;
         }
 
-        @keyframes bounceIn {
-            0% { transform: scale(0); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
+        .russian-text {
+            font-size: 1.5em;
+            color: var(--neon-pink);
+            margin-bottom: 20px;
+            font-weight: bold;
         }
 
-        .restart-btn {
+        .answer-box {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
             margin-top: 20px;
-            padding: 15px 40px;
-            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            display: none;
+            border: 1px solid var(--neon-green);
+        }
+
+        .answer-text {
+            font-size: 1.4em;
+            color: var(--neon-green);
+        }
+
+        .action-btn {
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
             border: none;
-            border-radius: 30px;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
             font-size: 1.1em;
             cursor: pointer;
+            margin-top: 15px;
             font-weight: bold;
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
-            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(188, 19, 254, 0.5);
+            transition: transform 0.2s;
         }
 
-        .restart-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.6);
+        .action-btn:hover {
+            transform: scale(1.05);
         }
 
-        @media (max-width: 768px) {
-            h1 { font-size: 2em; }
-            .container { padding: 20px; }
-            .score-display { 
-                position: relative; 
-                top: 0; 
-                right: 0; 
-                margin-bottom: 20px;
-                text-align: center;
-            }
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: transparent;
+            border: 1px solid white;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 15px;
+            cursor: pointer;
         }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .hidden { display: none; }
     </style>
 </head>
 <body>
-    <div class="score-display">
-        Score: <span id="score">0</span> / <span id="total">0</span>
-    </div>
+
+    <!-- Background Particles -->
+    <div id="particles"></div>
 
     <div class="container">
-        <h1>✨ Idioms Unit 11-19 ✨</h1>
-        <p class="subtitle">Test your knowledge of English idioms!</p>
-
-        <!-- Progress Bar -->
-        <div class="progress-container">
-            <div class="progress-info">
-                <span>Progress</span>
-                <span id="progress-text">0 / <span id="total-questions">0</span></span>
+        <button class="back-btn hidden" onclick="goHome()">← Menu</button>
+        
+        <!-- Main Menu -->
+        <div id="main-menu">
+            <h1>NEON IDIOMS</h1>
+            <p style="text-align: center; color: #aaa;">Select your challenge</p>
+            
+            <div class="menu-grid">
+                <div class="stage-card" onclick="selectStage(1)">
+                    <div class="stage-title">STAGE 1</div>
+                    <div class="stage-desc">Multiple Choice Quiz<br>Definition → Idiom</div>
+                </div>
+                <div class="stage-card" onclick="selectStage(2)">
+                    <div class="stage-title">STAGE 2</div>
+                    <div class="stage-desc">Translation Check<br>Russian → English</div>
+                </div>
             </div>
+
+            <div id="block-selection" class="hidden">
+                <h3 style="text-align: center; margin-top: 30px; color: var(--neon-blue);">Select Block</h3>
+                <div class="block-selector" id="block-buttons">
+                    <!-- Buttons generated by JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Area -->
+        <div id="game-area" class="game-area">
             <div class="progress-bar">
-                <div class="progress-fill" id="progress-fill"></div>
+                <div class="progress-fill" id="progress"></div>
+            </div>
+
+            <div id="stage-1-content" class="hidden">
+                <div class="question-card">
+                    <div class="definition" id="q-definition"></div>
+                    <div class="options-grid" id="q-options"></div>
+                    <div class="feedback" id="q-feedback"></div>
+                </div>
+                <button class="action-btn hidden" id="next-btn" onclick="nextQuestion()">Next →</button>
+            </div>
+
+            <div id="stage-2-content" class="hidden translation-card">
+                <div class="question-card">
+                    <div class="russian-text" id="s2-russian"></div>
+                    <button class="action-btn" onclick="checkTranslation()">Check Answer</button>
+                    <div class="answer-box" id="s2-answer">
+                        <div class="answer-text" id="s2-english"></div>
+                    </div>
+                </div>
+                <button class="action-btn hidden" id="s2-next-btn" onclick="nextQuestion()">Next →</button>
+            </div>
+
+            <div id="completion-screen" class="hidden" style="text-align: center;">
+                <h2 style="color: var(--neon-green); font-size: 2em; margin-bottom: 20px;">Block Complete! 🎉</h2>
+                <p style="margin-bottom: 30px;">Great job! Ready for the next challenge?</p>
+                <button class="action-btn" onclick="goHome()">Back to Menu</button>
             </div>
         </div>
-
-        <!-- Task 1: Multiple Choice -->
-        <div class="task-section">
-            <div class="task-title">
-                <span class="task-number">1</span>
-                Choose the correct idiom
-            </div>
-            <div id="task1-questions"></div>
-        </div>
-
-        <div class="final-score" id="finalScore"></div>
     </div>
 
     <script>
-        // Quiz Data - ALL idioms from images with textbook definitions
+        // Complete Idiom Database
         const allIdioms = [
-            // FINANCE & BUSINESS
-            { definition: "INF do sth without help from anyone else", correct: "on your own bat", wrong: ["with someone's help", "as a team player"] },
-            { definition: "have money/time that you can spend freely", correct: "have money/time to play with", wrong: ["be short of money", "be on a tight budget"] },
-            { definition: "produce good results", correct: "bear fruit", wrong: ["fail completely", "waste effort"] },
-            { definition: "INF spend a lot of money on sth, usually money you don't want to", correct: "fork out", wrong: ["save money", "earn money"] },
-            { definition: "be in a worse financial situation than before", correct: "be worse off", wrong: ["be better off", "be well-off"] },
-            { definition: "be able to use sth as a support when you are in difficulty", correct: "fall back on", wrong: ["depend on completely", "ignore completely"] },
-            { definition: "INF manage to get sth", correct: "lay/get your hands on", wrong: ["lose", "give away"] },
-            { definition: "pay all the money that you owe for sth", correct: "pay off", wrong: ["borrow more", "spend more"] },
-            { definition: "pay for everything yourself without relying on others", correct: "pay your own way", wrong: ["be in debt", "ask for help"] },
-            { definition: "rescue sb from a difficult situation, usually with money", correct: "bail out", wrong: ["abandon", "criticize"] },
-            { definition: "INF not be cheap; be expensive", correct: "not come cheap", wrong: ["be very cheap", "be free"] },
-            { definition: "INF spend an unusually large sum of money on sth", correct: "splash out", wrong: ["save money", "cut costs"] },
-            { definition: "INF be very expensive", correct: "cost an arm and a leg", wrong: ["be very cheap", "be affordable"] },
-            { definition: "used to say that the cost of sth is not important", correct: "money is no object", wrong: ["money is tight", "budget is limited"] },
-            { definition: "live in easy and comfortable conditions that result from being wealthy", correct: "in the lap of luxury", wrong: ["live in poverty", "struggle financially"] },
-            { definition: "spend more money than you earn", correct: "live beyond your means", wrong: ["save money", "live frugally"] },
-            { definition: "have just enough money or food to stay alive", correct: "live from hand to mouth", wrong: ["be wealthy", "have savings"] },
-            { definition: "INF be available at a lower price than usual", correct: "going cheap", wrong: ["be expensive", "be overpriced"] },
-            { definition: "save or keep sth for future use", correct: "put aside", wrong: ["spend immediately", "waste"] },
-            { definition: "pay some money to reserve sth, before paying for it in full", correct: "put down a deposit", wrong: ["pay in full", "cancel order"] },
-            { definition: "be late paying the money that you owe", correct: "be in arrears", wrong: ["pay on time", "be ahead"] },
-            { definition: "pay all the money that is owed", correct: "settle up", wrong: ["borrow more", "delay payment"] },
-            { definition: "support or strengthen sth that is weak or likely to fail", correct: "shore up", wrong: ["weaken", "destroy"] },
-            { definition: "when a company's managers buy the company from its owners", correct: "management buyout", wrong: ["company merger", "bankruptcy"] },
-            { definition: "at the last possible moment", correct: "at the eleventh hour", wrong: ["very early", "with plenty of time"] },
-            { definition: "financial help given to a company or country that is in difficulty", correct: "bailout", wrong: ["investment", "profit"] },
-            { definition: "INF be in a situation where the result is very uncertain", correct: "hang in the balance", wrong: ["be certain", "be decided"] },
-            { definition: "be very close to doing sth or to sth happening", correct: "on the verge of", wrong: ["be far from", "avoid"] },
-            { definition: "stop being involved in an activity or agreement", correct: "pull out", wrong: ["join in", "commit to"] },
-            { definition: "INF (of an organization) fail because of lack of money", correct: "go to the wall", wrong: ["succeed", "prosper"] },
-            { definition: "DISAPPROVING do sth in the easiest, cheapest way to save time or money", correct: "cut corners", wrong: ["do thoroughly", "spend more"] },
-            { definition: "a way of saving money that actually costs more in the long term", correct: "false economy", wrong: ["wise investment", "good saving"] },
-            { definition: "stop doing sth that is causing you to lose money so that you lose less", correct: "cut your losses", wrong: ["continue losing", "invest more"] },
-            { definition: "INF sell everything you own, especially your house or business", correct: "sell up", wrong: ["buy more", "keep everything"] },
-            { definition: "the usual price for a particular thing or service", correct: "the going rate", wrong: ["special discount", "unusual price"] },
-            { definition: "arrange to deal directly with sb, without using a person or company that acts between you", correct: "cut out the middleman", wrong: ["use an agent", "add intermediaries"] },
-            { definition: "produce a successful result", correct: "pay off", wrong: ["fail", "be useless"] },
-            { definition: "use money you have earned to improve or develop a business", correct: "plough back", wrong: ["spend on yourself", "save in bank"] },
+            // Block 1 (Finance & Business)
+            { def: "INF do sth without help from anyone else", ru: "самостоятельно, без чьей-либо помощи", en: "on your own bat" },
+            { def: "have money/time that you can spend freely", ru: "иметь лишние деньги/время", en: "have money/time to play with" },
+            { def: "produce good results", ru: "приносить хорошие результаты", en: "bear fruit" },
+            { def: "INF spend a lot of money on sth, usually money you don't want to", ru: "неохотно тратить много денег", en: "fork out" },
+            { def: "be in a worse financial situation than before", ru: "быть в худшем финансовом положении", en: "be worse off" },
+            { def: "be able to use sth as a support when you are in difficulty", ru: "иметь запасной вариант", en: "fall back on" },
+            { def: "INF manage to get sth", ru: "заполучить, раздобыть", en: "lay/get your hands on" },
+            { def: "pay all the money that you owe for sth", ru: "полностью выплатить долг", en: "pay off" },
+            { def: "pay for everything yourself without relying on others", ru: "платить за себя самому", en: "pay your own way" },
+            { def: "rescue sb from a difficult situation, usually with money", ru: "выручить кого-то (деньгами)", en: "bail out" },
+            { def: "INF not be cheap; be expensive", ru: "стоить дорого", en: "not come cheap" },
+            { def: "INF spend an unusually large sum of money on sth", ru: "потратить много денег на удовольствие", en: "splash out" },
+            { def: "INF be very expensive", ru: "стоить целое состояние", en: "cost an arm and a leg" },
+            { def: "used to say that the cost of sth is not important", ru: "деньги не имеют значения", en: "money is no object" },
+            { def: "live in easy and comfortable conditions that result from being wealthy", ru: "жить в роскоши", en: "in the lap of luxury" },
+            { def: "spend more money than you earn", ru: "тратить больше, чем зарабатываешь", en: "live beyond your means" },
+            { def: "have just enough money or food to stay alive", ru: "жить от зарплаты до зарплаты", en: "live from hand to mouth" },
+            { def: "INF be available at a lower price than usual", ru: "продаваться дёшево", en: "going cheap" },
+            { def: "save or keep sth for future use", ru: "откладывать на будущее", en: "put aside" },
+            { def: "pay some money to reserve sth, before paying for it in full", ru: "внести залог", en: "put down a deposit" },
+            { def: "be late paying the money that you owe", ru: "иметь задолженность", en: "be in arrears" },
+            { def: "pay all the money that is owed", ru: "расплатиться", en: "settle up" },
+            { def: "support or strengthen sth that is weak or likely to fail", ru: "поддержать, укрепить", en: "shore up" },
+            { def: "when a company's managers buy the company from its owners", ru: "выкуп компании руководством", en: "management buyout" },
+            { def: "at the last possible moment", ru: "в последнюю минуту", en: "at the eleventh hour" },
+            { def: "financial help given to a company or country that is in difficulty", ru: "финансовая помощь в кризис", en: "bailout" },
+            { def: "INF be in a situation where the result is very uncertain", ru: "быть под вопросом", en: "hang in the balance" },
+            { def: "be very close to doing sth or to sth happening", ru: "быть на грани", en: "on the verge of" },
+            { def: "stop being involved in an activity or agreement", ru: "выйти из сделки", en: "pull out" },
+            { def: "INF (of an organization) fail because of lack of money", ru: "обанкротиться", en: "go to the wall" },
+            { def: "DISAPPROVING do sth in the easiest, cheapest way to save time or money", ru: "срезать углы", en: "cut corners" },
+            { def: "a way of saving money that actually costs more in the long term", ru: "ложная экономия", en: "false economy" },
+            { def: "stop doing sth that is causing you to lose money so that you lose less", ru: "ограничить потери", en: "cut your losses" },
+            { def: "INF sell everything you own, especially your house or business", ru: "продать всё имущество", en: "sell up" },
+            { def: "the usual price for a particular thing or service", ru: "рыночная цена", en: "the going rate" },
+            { def: "arrange to deal directly with sb, without using a person or company that acts between you", ru: "убрать посредника", en: "cut out the middleman" },
+            { def: "produce a successful result", ru: "окупиться", en: "pay off" },
+            { def: "use money you have earned to improve or develop a business", ru: "реинвестировать прибыль", en: "plough back" },
+            { def: "thinking about a past event with the advantage of knowing more now", ru: "оглядываясь назад", en: "in retrospect" },
+            { def: "stay slightly ahead of a competitor or enemy", ru: "быть на шаг впереди", en: "keep one step ahead" },
 
-            // HEALTH
-            { definition: "not be behaving in your usual way, especially because you are worried or ill", correct: "not your usual self", wrong: ["be yourself", "be happy"] },
-            { definition: "INF slightly ill", correct: "off-colour", wrong: ["perfectly healthy", "very energetic"] },
-            { definition: "INF feel or look very ill or tired", correct: "feel/look like death warmed up", wrong: ["feel great", "look healthy"] },
-            { definition: "INF vomit", correct: "throw up", wrong: ["eat", "digest"] },
-            { definition: "INF fall over, especially when you feel ill", correct: "keel over", wrong: ["stand up", "stay steady"] },
-            { definition: "INF stop being conscious for a short time", correct: "pass out", wrong: ["wake up", "stay awake"] },
-            { definition: "(of a pain, feeling, or effect) gradually disappear or stop", correct: "wear off", wrong: ["get stronger", "start suddenly"] },
-            { definition: "INF become ill with a disease that other people have", correct: "come/go down with", wrong: ["recover from", "avoid"] },
-            { definition: "(of an illness) be passed from one person to another", correct: "go round", wrong: ["disappear", "stay with one person"] },
-            { definition: "INF catch an infectious illness", correct: "pick up", wrong: ["cure", "prevent"] },
-            { definition: "relax and avoid working hard or doing too much", correct: "take things easy", wrong: ["work hard", "rush"] },
-            { definition: "INF getting better after an illness or injury", correct: "on the mend", wrong: ["getting worse", "staying ill"] },
-            { definition: "start to get better or worse", correct: "take a turn for the better/worse", wrong: ["stay the same", "recover completely"] },
-            { definition: "become worse, especially of a person's health", correct: "go downhill", wrong: ["improve", "stay stable"] },
-            { definition: "INF it's very uncertain whether sth will happen or not", correct: "touch-and-go", wrong: ["certain", "guaranteed"] },
-            { definition: "INF recover from a serious illness or difficult situation", correct: "pull through", wrong: ["give up", "fail"] },
-            { definition: "feel slightly ill or unhappy", correct: "feel/be out of sorts", wrong: ["feel great", "be cheerful"] },
-            { definition: "become larger and rounder because of illness or injury", correct: "swell up", wrong: ["shrink", "stay the same"] },
-            { definition: "develop a rash or spots on your skin", correct: "come out in", wrong: ["heal", "clear up"] },
-            { definition: "examine or investigate sth to make sure it is correct or safe", correct: "check out", wrong: ["ignore", "assume"] },
-            { definition: "said when you hope that sth bad will not happen", correct: "touch wood", wrong: ["expect the worst", "be pessimistic"] },
-            { definition: "it is better to be careful than to take risks and possibly have problems later", correct: "better safe than sorry", wrong: ["take risks", "be careless"] },
-            { definition: "in order to avoid any risk or danger", correct: "to be on the safe side", wrong: ["take chances", "be risky"] },
+            // Block 2 (Health & Body)
+            { def: "not be behaving in your usual way, especially because you are worried or ill", ru: "быть не в себе", en: "not your usual self" },
+            { def: "INF slightly ill", ru: "чувствовать себя немного нездоровым", en: "off-colour" },
+            { def: "INF feel or look very ill or tired", ru: "выглядеть очень плохо", en: "feel like death warmed up" },
+            { def: "INF vomit", ru: "рвать", en: "throw up" },
+            { def: "INF fall over, especially when you feel ill", ru: "упасть в обморок", en: "keel over" },
+            { def: "INF stop being conscious for a short time", ru: "потерять сознание", en: "pass out" },
+            { def: "(of a pain, feeling, or effect) gradually disappear or stop", ru: "постепенно проходить", en: "wear off" },
+            { def: "INF become ill with a disease that other people have", ru: "заболеть", en: "come/go down with" },
+            { def: "(of an illness) be passed from one person to another", ru: "распространяться (о болезни)", en: "go round" },
+            { def: "INF catch an infectious illness", ru: "подхватить инфекцию", en: "pick up" },
+            { def: "relax and avoid working hard or doing too much", ru: "не напрягаться, отдыхать", en: "take things easy" },
+            { def: "INF getting better after an illness or injury", ru: "поправляться", en: "on the mend" },
+            { def: "start to get better or worse", ru: "измениться к лучшему/худшему", en: "take a turn for the better/worse" },
+            { def: "become worse, especially of a person's health", ru: "ухудшаться", en: "go downhill" },
+            { def: "INF it's very uncertain whether sth will happen or not", ru: "всё под вопросом", en: "touch-and-go" },
+            { def: "INF recover from a serious illness or difficult situation", ru: "выкарабкаться", en: "pull through" },
+            { def: "feel slightly ill or unhappy", ru: "чувствовать себя неважно", en: "feel/be out of sorts" },
+            { def: "become larger and rounder because of illness or injury", ru: "опухать", en: "swell up" },
+            { def: "develop a rash or spots on your skin", ru: "покрыться сыпью", en: "come out in" },
+            { def: "examine or investigate sth to make sure it is correct or safe", ru: "проверить", en: "check out" },
+            { def: "said when you hope that sth bad will not happen", ru: "постучать по дереву", en: "touch wood" },
+            { def: "it is better to be careful than to take risks", ru: "бережёного бог бережёт", en: "better safe than sorry" },
+            { def: "in order to avoid any risk or danger", ru: "на всякий случай", en: "to be on the safe side" },
+            { def: "INF a small amount of food", ru: "перекусить", en: "a bite" },
+            { def: "have eaten enough", ru: "быть сытым", en: "be full up" },
+            { def: "eat only small amounts of food because you are not hungry", ru: "ковыряться в еде", en: "pick at" },
+            { def: "make you want to eat sth because it looks or smells delicious", ru: "вызывать аппетит", en: "make your mouth water" },
+            { def: "food that remains after a meal", ru: "остатки еды", en: "leftovers" },
+            { def: "INF eat all of sth", ru: "доесть всё до конца", en: "polish off" },
+            { def: "eat a lot of food", ru: "есть очень много", en: "eat like a horse" },
+            { def: "said when you think sth is very good or useful", ru: "лучшее, что придумали", en: "the best thing since sliced bread" },
+            { def: "make sb admire and obey you", ru: "заставить слушаться", en: "have sb eating out of your hand" },
+            { def: "be embarrassed because sth you tried to do went wrong", ru: "опозориться", en: "have egg on your face" },
+            { def: "escape from a bad situation by going into a worse one", ru: "из огня да в полымя", en: "out of the frying pan into the fire" },
+            { def: "INF a person who spends too much time watching TV", ru: "лежебока", en: "couch potato" },
+            { def: "try to do too much or do sth that is too difficult", ru: "взяться за слишком сложное", en: "bite off more than you can chew" },
+            { def: "said when sb seems innocent but is not", ru: "выглядеть невинным", en: "butter wouldn't melt" },
+            { def: "INF be involved and influential in a lot of different activities", ru: "быть в курсе всего", en: "have a finger in every pie" },
+            { def: "waste time worrying about sth that has already happened", ru: "плакать над пролитым молоком", en: "cry over spilt milk" },
+            { def: "full of energy and enthusiasm", ru: "полный энергии", en: "full of beans" },
 
-            // FOOD
-            { definition: "INF a small amount of food", correct: "a bite", wrong: ["a large meal", "a feast"] },
-            { definition: "have eaten enough", correct: "be full up", wrong: ["be hungry", "be starving"] },
-            { definition: "eat only small amounts of food because you are not hungry or do not like it", correct: "pick at", wrong: ["eat eagerly", "finish quickly"] },
-            { definition: "make you want to eat sth because it looks or smells delicious", correct: "make your mouth water", wrong: ["disgust you", "make you sick"] },
-            { definition: "food that remains after a meal", correct: "leftovers", wrong: ["fresh food", "main course"] },
-            { definition: "INF eat all of sth", correct: "polish off", wrong: ["leave some", "waste"] },
-            { definition: "eat a lot of food", correct: "eat like a horse", wrong: ["eat very little", "be on a diet"] },
-            { definition: "said when you think sth is very good or useful", correct: "the best thing since sliced bread", wrong: ["terrible", "useless"] },
-            { definition: "make sb admire and obey you", correct: "have sb eating out of your hand", wrong: ["annoy sb", "ignore sb"] },
-            { definition: "be embarrassed because sth you tried to do went wrong", correct: "have egg on your face", wrong: ["be proud", "succeed"] },
-            { definition: "escape from a bad situation by going into a worse one", correct: "out of the frying pan into the fire", wrong: ["solve the problem", "improve situation"] },
-            { definition: "INF a person who spends too much time watching TV", correct: "couch potato", wrong: ["active person", "sports fan"] },
-            { definition: "try to do too much or do sth that is too difficult", correct: "bite off more than you can chew", wrong: ["do easily", "succeed"] },
-            { definition: "said when sb seems innocent but is not", correct: "butter wouldn't melt", wrong: ["look guilty", "be honest"] },
-            { definition: "INF be involved and influential in a lot of different activities", correct: "have a finger in every pie", wrong: ["do nothing", "focus on one thing"] },
-            { definition: "waste time worrying about sth that has already happened", correct: "cry over spilt milk", wrong: ["move on", "learn from mistakes"] },
-            { definition: "full of energy and enthusiasm", correct: "full of beans", wrong: ["tired", "lazy"] },
+            // Block 3 (Work & Career)
+            { def: "(used with time, age, distance, etc.) almost; very nearly", ru: "почти, почти что", en: "close on" },
+            { def: "a person who is so familiar that you no longer notice them", ru: "стать незаметным", en: "part of the furniture" },
+            { def: "INF not be suitable for a particular job or organization", ru: "не подходить для работы", en: "sb's face doesn't fit" },
+            { def: "look after sb who has less experience than you", ru: "взять под своё крыло", en: "take under your wing" },
+            { def: "the clever ways of doing things in a particular job", ru: "секреты ремесла", en: "the tricks of the trade" },
+            { def: "give information or an object to another person", ru: "передать что-то", en: "pass on" },
+            { def: "a job with no chance of promotion or success", ru: "тупиковая работа", en: "dead-end job" },
+            { def: "INF be difficult to do", ru: "быть трудным", en: "make some doing" },
+            { def: "use your power or influence in a way that annoys other people", ru: "важничать", en: "throw your weight around" },
+            { def: "INF be dismissed from a job", ru: "получить отказ/быть уволенным", en: "get the push/boot/elbow" },
+            { def: "get your first opportunity to work for an organization", ru: "получить первый шанс", en: "get your foot in the door" },
+            { def: "accept and deal with sth difficult without letting it worry you", ru: "легко справляться", en: "take in your stride" },
+            { def: "base all your hopes for success on one thing only", ru: "возлагать все надежды", en: "pin your hopes on" },
+            { def: "do sth without help from anyone else", ru: "действовать в одиночку", en: "go it alone" },
+            { def: "risk everything on a single venture", ru: "поставить всё на одну карту", en: "put all your eggs in one basket" },
+            { def: "continue to have a good relationship with sb, especially because they can help you", ru: "поддерживать отношения", en: "keep in with" },
+            { def: "make sure you find out about recent developments by talking informally", ru: "держать руку на пульсе", en: "keep your ear to the ground" },
+            { def: "through informal conversation and rumours", ru: "по слухам", en: "on the grapevine" },
+            { def: "become well known and respected", ru: "прославиться", en: "make a name for yourself" },
+            { def: "have a sensible and realistic attitude", ru: "стоять на земле", en: "keep your feet on the ground" },
+            { def: "as time passes", ru: "с течением времени", en: "as time goes by" },
+            { def: "only a short period of seconds/minutes/days", ru: "вопрос секунд/минут", en: "a matter of" },
+            { def: "according to the most recent information I have", ru: "по последним данным", en: "the last I heard" },
+            { def: "used to emphasize that a description is not exaggerated", ru: "мягко говоря", en: "to say the least" },
+            { def: "the situation has not changed", ru: "всё то же самое", en: "it's the same old story" },
+            { def: "start working more effectively or faster", ru: "ускориться", en: "step up a gear" },
+            { def: "at a later time in the future", ru: "в будущем", en: "down the road" },
+            { def: "give permission to start sth", ru: "дать добро", en: "give the green light" },
+            { def: "make sb/sth famous or successful", ru: "сделать известным", en: "put on the map" },
+            { def: "the point at which sth ends", ru: "конец пути", en: "the end of the road" },
+            { def: "lose your energy and enthusiasm", ru: "выдохнуться", en: "run out of steam" },
+            { def: "INF start behaving in a wild or unacceptable way", ru: "сбиться с пути", en: "go off the rails" },
+            { def: "working at the fastest or most effective rate", ru: "на полной скорости", en: "in top gear" },
+            { def: "continue to exist or happen without developing or changing much", ru: "работать вполсилы", en: "tick over" },
+            { def: "every night for a long time", ru: "ночь за ночью", en: "night after night" },
+            { def: "almost nothing; a very small amount", ru: "почти ничего", en: "next to nothing" },
+            { def: "start behaving in a better or more acceptable way", ru: "начать новую жизнь", en: "turn over a new leaf" },
+            { def: "very successfully; with a very high mark/grade", ru: "с блеском", en: "with flying colours" },
+            { def: "succeed in doing sth with difficulty", ru: "еле пройти", en: "scrape through" },
+            { def: "as part of a normal process", ru: "в порядке вещей", en: "as a matter of course" },
 
-            // WORK & CAREER
-            { definition: "(used with time, age, distance, etc.) almost; very nearly", correct: "close on", wrong: ["far from", "exactly"] },
-            { definition: "a person who is so familiar that you no longer notice them", correct: "part of the furniture", wrong: ["newcomer", "very noticeable"] },
-            { definition: "INF not be suitable for a particular job or organization", correct: "sb's face doesn't fit", wrong: ["be perfect fit", "be welcomed"] },
-            { definition: "look after sb who has less experience than you", correct: "take under your wing", wrong: ["ignore", "criticize"] },
-            { definition: "the clever ways of doing things in a particular job", correct: "the tricks of the trade", wrong: ["basic rules", "obvious methods"] },
-            { definition: "give information or an object to another person", correct: "pass on", wrong: ["keep", "hide"] },
-            { definition: "a job with no chance of promotion or success", correct: "dead-end job", wrong: ["promising career", "good opportunity"] },
-            { definition: "INF be difficult to do", correct: "make some doing", wrong: ["be easy", "require no effort"] },
-            { definition: "use your power or influence in a way that annoys other people", correct: "throw your weight around", wrong: ["be humble", "help others"] },
-            { definition: "INF be dismissed from a job", correct: "get the push/boot/elbow", wrong: ["get promoted", "be hired"] },
-            { definition: "get your first opportunity to work for an organization", correct: "get your foot in the door", wrong: ["be rejected", "lose opportunity"] },
-            { definition: "accept and deal with sth difficult without letting it worry you", correct: "take in your stride", wrong: ["worry about", "avoid"] },
-            { definition: "base all your hopes for success on one thing only", correct: "pin your hopes on", wrong: ["have multiple plans", "be realistic"] },
-            { definition: "do sth without help from anyone else", correct: "go it alone", wrong: ["work with others", "ask for help"] },
-            { definition: "risk everything on a single venture", correct: "put all your eggs in one basket", wrong: ["diversify", "be cautious"] },
-            { definition: "continue to have a good relationship with sb, especially because they can help you", correct: "keep in with", wrong: ["fall out with", "ignore"] },
-            { definition: "make sure you find out about recent developments by talking informally", correct: "keep your ear to the ground", wrong: ["ignore news", "stay uninformed"] },
-            { definition: "through informal conversation and rumours", correct: "on the grapevine", wrong: ["officially", "formally"] },
-            { definition: "become well known and respected", correct: "make a name for yourself", wrong: ["remain unknown", "be forgotten"] },
-            { definition: "have a sensible and realistic attitude", correct: "keep your feet on the ground", wrong: ["be unrealistic", "dream"] },
-
-            // TIME & SPEED
-            { definition: "as time passes", correct: "as time goes by", wrong: ["immediately", "suddenly"] },
-            { definition: "only a short period of seconds/minutes/days", correct: "a matter of", wrong: ["a long time", "ages"] },
-            { definition: "according to the most recent information I have", correct: "the last I heard", wrong: ["I don't know", "I never heard"] },
-            { definition: "used to emphasize that a description is not exaggerated", correct: "to say the least", wrong: ["to exaggerate", "to overstate"] },
-            { definition: "the situation has not changed", correct: "it's the same old story", wrong: ["things are different", "new situation"] },
-            { definition: "start working more effectively or faster", correct: "step up a gear", wrong: ["slow down", "stop working"] },
-            { definition: "at a later time in the future", correct: "down the road", wrong: ["right now", "in the past"] },
-            { definition: "give permission to start sth", correct: "give the green light", wrong: ["stop", "forbid"] },
-            { definition: "make sb/sth famous or successful", correct: "put on the map", wrong: ["make unknown", "ignore"] },
-            { definition: "the point at which sth ends", correct: "the end of the road", wrong: ["the beginning", "midpoint"] },
-            { definition: "lose your energy and enthusiasm", correct: "run out of steam", wrong: ["gain energy", "get motivated"] },
-            { definition: "INF start behaving in a wild or unacceptable way", correct: "go off the rails", wrong: ["behave well", "follow rules"] },
-            { definition: "working at the fastest or most effective rate", correct: "in top gear", wrong: ["slowly", "inefficiently"] },
-            { definition: "continue to exist or happen without developing or changing much", correct: "tick over", wrong: ["develop rapidly", "change completely"] },
-            { definition: "every night for a long time", correct: "night after night", wrong: ["once", "rarely"] },
-            { definition: "almost nothing; a very small amount", correct: "next to nothing", wrong: ["a lot", "everything"] },
-            { definition: "start behaving in a better or more acceptable way", correct: "turn over a new leaf", wrong: ["stay the same", "get worse"] },
-            { definition: "very successfully; with a very high mark/grade", correct: "with flying colours", wrong: ["poorly", "barely"] },
-            { definition: "succeed in doing sth with difficulty", correct: "scrape through", wrong: ["fail", "give up"] },
-            { definition: "as part of a normal process", correct: "as a matter of course", wrong: ["unusually", "rarely"] },
-            { definition: "for two weeks/three years without stopping", correct: "running", wrong: ["occasionally", "with breaks"] },
-            { definition: "INF improve; make progress", correct: "come on", wrong: ["get worse", "stay the same"] },
-            { definition: "very quickly and by a large amount", correct: "in leaps and bounds", wrong: ["slowly", "gradually"] },
-            { definition: "in a short period of time", correct: "in a short space of time", wrong: ["over many years", "slowly"] },
-            { definition: "stop making an effort because you have already achieved sth", correct: "rest on your laurels", wrong: ["keep trying", "aim higher"] },
-            { definition: "INF be doing well and being successful", correct: "be going strong", wrong: ["be failing", "struggle"] },
-
-            // MOVEMENT & TRANSPORT
-            { definition: "prevent sb/sth from moving by getting in the way", correct: "block in", wrong: ["help move", "clear the way"] },
-            { definition: "move into a line of traffic in front of another vehicle", correct: "cut in", wrong: ["stay behind", "wait your turn"] },
-            { definition: "signal to a vehicle or driver to stop", correct: "flag down", wrong: ["ignore", "speed past"] },
-            { definition: "move a vehicle to the side of the road and stop", correct: "pull over", wrong: ["speed up", "continue driving"] },
-            { definition: "travel from one place to another", correct: "get from A to B", wrong: ["stay in one place", "get lost"] },
-            { definition: "in a straight line between two places", correct: "as the crow flies", wrong: ["by the longest route", "with many stops"] },
-            { definition: "INF be extremely difficult or unpleasant", correct: "be murder", wrong: ["be easy", "be pleasant"] },
-            { definition: "take sb in a vehicle to a place and leave them there", correct: "drop off", wrong: ["pick up", "take with you"] },
-            { definition: "allow very little time to do sth", correct: "cut it fine", wrong: ["allow plenty of time", "be early"] },
-            { definition: "very slowly", correct: "at a snail's pace", wrong: ["very fast", "quickly"] },
-            { definition: "INF in the countryside, a long way from a town", correct: "miles from anywhere", wrong: ["in the city center", "easily accessible"] },
-
-            // GENERAL
-            { definition: "cause sb to be in a difficult or unpleasant situation", correct: "land sb in", wrong: ["help sb out", "save sb"] },
-            { definition: "be too careful rather than take risks", correct: "err on the side of caution", wrong: ["take risks", "be reckless"] },
-            { definition: "continue to have or keep sth", correct: "hold on to", wrong: ["let go", "lose"] },
-            { definition: "include sth as an extra part of sth", correct: "add on", wrong: ["remove", "subtract"] },
-            { definition: "finally reach a particular state or total", correct: "come to", wrong: ["start from", "avoid"] },
-            { definition: "knowing all the facts and dangers", correct: "with your eyes open", wrong: ["unaware", "ignorant"] },
-            { definition: "make sb lose interest or enthusiasm for sth", correct: "put sb off", wrong: ["encourage", "motivate"] },
-            { definition: "almost; nearly", correct: "pretty much", wrong: ["not at all", "completely different"] },
-            { definition: "very poor; with very little money to live on", correct: "on the breadline", wrong: ["wealthy", "comfortable"] },
-            { definition: "INF have more money than good sense about how to spend it", correct: "have more money than sense", wrong: ["be wise with money", "be frugal"] },
-            { definition: "live an exciting life, taking risks and doing a lot of things", correct: "live life in the fast lane", wrong: ["live quietly", "avoid risks"] },
-            { definition: "not think that sth is important or surprising", correct: "think nothing of", wrong: ["be shocked by", "consider important"] },
-            { definition: "go to a place, especially for the first time", correct: "set foot in/on", wrong: ["avoid", "leave"] },
-            { definition: "become involved in sth, often without wanting to", correct: "be caught up in", wrong: ["stay out of", "avoid"] },
-            { definition: "by people telling other people, rather than by being officially announced", correct: "by word of mouth", wrong: ["officially", "in writing"] },
-            { definition: "burn sth so much that it becomes black and hard", correct: "burn to a crisp", wrong: ["cook perfectly", "undercook"] },
-            { definition: "thinking about a past event or situation, especially with the advantage of knowing more now", correct: "in retrospect", wrong: ["looking forward", "in the moment"] },
-            { definition: "stay slightly ahead of a competitor or enemy", correct: "keep one step ahead", wrong: ["fall behind", "be equal"] },
-            { definition: "INF fail to take advantage of an opportunity", correct: "miss the boat", wrong: ["seize the opportunity", "succeed"] },
-            { definition: "fool yourself into believing sth that is not true", correct: "delude yourself", wrong: ["be honest", "face reality"] },
-            { definition: "make a product available in such large quantities that the price falls", correct: "flood the market", wrong: ["create shortage", "raise prices"] },
-            { definition: "INF be in a difficult or dangerous situation", correct: "be in deep water", wrong: ["be safe", "be comfortable"] },
-            { definition: "having too many people in positions of authority compared with ordinary workers", correct: "top-heavy", wrong: ["well-balanced", "efficient"] },
-            { definition: "encourage two people or groups to compete or fight against each other", correct: "play off against", wrong: ["unite", "reconcile"] },
-            { definition: "be in the right situation at the right time to achieve sth", correct: "be in the right place at the right time", wrong: ["be unlucky", "miss opportunities"] },
-            { definition: "INF a great success", correct: "a roaring success", wrong: ["a failure", "mediocre"] }
+            // Block 4 (Movement & General)
+            { def: "for two weeks/three years without stopping", ru: "подряд", en: "running" },
+            { def: "INF improve; make progress", ru: "улучшаться", en: "come on" },
+            { def: "very quickly and by a large amount", ru: "очень быстро, скачками", en: "in leaps and bounds" },
+            { def: "in a short period of time", ru: "за короткое время", en: "in a short space of time" },
+            { def: "stop making an effort because you have already achieved sth", ru: "почивать на лаврах", en: "rest on your laurels" },
+            { def: "INF be doing well and being successful", ru: "процветать", en: "be going strong" },
+            { def: "prevent sb/sth from moving by getting in the way", ru: "заблокировать", en: "block in" },
+            { def: "move into a line of traffic in front of another vehicle", ru: "подрезать", en: "cut in" },
+            { def: "signal to a vehicle or driver to stop", ru: "остановить сигналом", en: "flag down" },
+            { def: "move a vehicle to the side of the road and stop", ru: "прижаться к обочине", en: "pull over" },
+            { def: "travel from one place to another", ru: "добраться из А в Б", en: "get from A to B" },
+            { def: "in a straight line between two places", ru: "по прямой", en: "as the crow flies" },
+            { def: "INF be extremely difficult or unpleasant", ru: "быть очень трудным", en: "be murder" },
+            { def: "take sb in a vehicle to a place and leave them there", ru: "высадить кого-то", en: "drop off" },
+            { def: "allow very little time to do sth", ru: "оставлять на последний момент", en: "cut it fine" },
+            { def: "very slowly", ru: "очень медленно", en: "at a snail's pace" },
+            { def: "INF in the countryside, a long way from a town", ru: "далеко от всего", en: "miles from anywhere" },
+            { def: "cause sb to be in a difficult or unpleasant situation", ru: "втянуть в ситуацию", en: "land sb in" },
+            { def: "be too careful rather than take risks", ru: "перестраховаться", en: "err on the side of caution" },
+            { def: "continue to have or keep sth", ru: "держаться за что-то", en: "hold on to" },
+            { def: "include sth as an extra part of sth", ru: "добавить как дополнение", en: "add on" },
+            { def: "finally reach a particular state or total", ru: "в итоге составить", en: "come to" },
+            { def: "knowing all the facts and dangers", ru: "сознательно", en: "with your eyes open" },
+            { def: "make sb lose interest or enthusiasm for sth", ru: "отбить желание", en: "put sb off" },
+            { def: "almost; nearly", ru: "почти, практически", en: "pretty much" },
+            { def: "very poor; with very little money to live on", ru: "за чертой бедности", en: "on the breadline" },
+            { def: "INF have more money than good sense about how to spend it", ru: "иметь больше денег, чем ума", en: "have more money than sense" },
+            { def: "live an exciting life, taking risks and doing a lot of things", ru: "жить на полной скорости", en: "live life in the fast lane" },
+            { def: "not think that sth is important or surprising", ru: "не считать важным", en: "think nothing of" },
+            { def: "go to a place, especially for the first time", ru: "ступить куда-то", en: "set foot in/on" },
+            { def: "become involved in sth, often without wanting to", ru: "быть вовлечённым", en: "be caught up in" },
+            { def: "by people telling other people, rather than by being officially announced", ru: "из уст в уста", en: "by word of mouth" },
+            { def: "burn sth so much that it becomes black and hard", ru: "сжечь дотла", en: "burn to a crisp" },
+            { def: "INF fail to take advantage of an opportunity", ru: "упустить шанс", en: "miss the boat" },
+            { def: "fool yourself into believing sth that is not true", ru: "обманывать себя", en: "delude yourself" },
+            { def: "make a product available in such large quantities that the price falls", ru: "наводнить рынок", en: "flood the market" },
+            { def: "INF be in a difficult or dangerous situation", ru: "быть в серьёзных неприятностях", en: "be in deep water" },
+            { def: "having too many people in positions of authority compared with ordinary workers", ru: "перегруженный руководством", en: "top-heavy" },
+            { def: "encourage two people or groups to compete or fight against each other", ru: "стравливать людей", en: "play off against" },
+            { def: "be in the right situation at the right time to achieve sth", ru: "оказаться в нужном месте", en: "be in the right place at the right time" },
+            { def: "INF a great success", ru: "оглушительный успех", en: "a roaring success" }
         ];
 
-        // Fisher-Yates shuffle
+        // Fisher-Yates shuffle function
         function shuffleArray(array) {
             const shuffled = [...array];
             for (let i = shuffled.length - 1; i > 0; i--) {
@@ -591,154 +537,190 @@
             return shuffled;
         }
 
-        let score = 0;
-        let answeredCount = 0;
-        let answeredQuestions = new Set();
-        let shuffledQuestions = [];
+        // Game State
+        let currentStage = 0;
+        let currentBlock = 0;
+        let currentBlockData = [];
+        let currentIndex = 0;
+        let isStage1 = true;
 
-        // Initialize Quiz
-        function initQuiz() {
-            // Shuffle all questions
-            shuffledQuestions = shuffleArray(allIdioms);
-            
-            const container = document.getElementById('task1-questions');
-            container.innerHTML = '';
-            
-            shuffledQuestions.forEach((q, index) => {
-                // Shuffle options: correct + 2 wrong
-                const options = shuffleArray([q.correct, ...q.wrong]);
-                
-                const questionDiv = document.createElement('div');
-                questionDiv.className = 'question';
-                questionDiv.id = `question-${index}`;
-                questionDiv.innerHTML = `
-                    <div class="question-text">${index + 1}. ${q.definition}</div>
-                    <div class="options">
-                        ${options.map((opt, i) => `
-                            <button class="option-btn" onclick="checkAnswer(${index}, '${opt.replace(/'/g, "\\'")}', this)">
-                                ${String.fromCharCode(65 + i)}. ${opt}
-                            </button>
-                        `).join('')}
-                    </div>
-                    <div class="result-message" id="result-${index}"></div>
-                `;
-                container.appendChild(questionDiv);
-            });
-            
-            document.getElementById('total').textContent = shuffledQuestions.length;
-            document.getElementById('total-questions').textContent = shuffledQuestions.length;
-            updateProgress();
+        // Initialize
+        function init() {
+            createParticles();
         }
 
-        function checkAnswer(questionIndex, selectedAnswer, btnElement) {
-            if (answeredQuestions.has(questionIndex)) return;
+        function createParticles() {
+            const container = document.getElementById('particles');
+            for(let i=0; i<20; i++) {
+                const p = document.createElement('div');
+                p.className = 'particle';
+                p.style.left = Math.random() * 100 + 'vw';
+                p.style.animationDelay = Math.random() * 5 + 's';
+                p.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                container.appendChild(p);
+            }
+        }
+
+        // Navigation
+        function selectStage(stage) {
+            currentStage = stage;
+            isStage1 = (stage === 1);
             
-            const question = shuffledQuestions[questionIndex];
-            const resultDiv = document.getElementById(`result-${questionIndex}`);
-            const buttons = btnElement.parentElement.querySelectorAll('.option-btn');
+            document.getElementById('main-menu').querySelector('.menu-grid').classList.add('hidden');
+            document.getElementById('block-selection').classList.remove('hidden');
             
-            answeredQuestions.add(questionIndex);
-            answeredCount++;
+            const blockContainer = document.getElementById('block-buttons');
+            blockContainer.innerHTML = '';
             
-            // Disable all buttons and highlight correct one
-            buttons.forEach(btn => {
-                btn.disabled = true;
-                btn.style.cursor = 'not-allowed';
-                if (btn.textContent.includes(question.correct)) {
-                    btn.classList.add('correct');
-                }
-            });
+            // Create 4 blocks
+            for(let i=1; i<=4; i++) {
+                const btn = document.createElement('button');
+                btn.className = 'block-btn';
+                btn.textContent = `Block ${i}`;
+                btn.onclick = () => startBlock(i, btn);
+                blockContainer.appendChild(btn);
+            }
+        }
+
+        function startBlock(blockNum, btnElement) {
+            // Highlight selected block
+            document.querySelectorAll('.block-btn').forEach(b => b.classList.remove('active'));
+            btnElement.classList.add('active');
             
-            // Check answer
-            if (selectedAnswer === question.correct) {
-                score++;
-                document.getElementById('score').textContent = score;
-                resultDiv.textContent = '✅ Correct! Well done!';
-                resultDiv.className = 'result-message correct';
+            currentBlock = blockNum;
+            
+            // Slice data into blocks (40 items each)
+            const start = (blockNum - 1) * 40;
+            const end = start + 40;
+            
+            // SHUFFLE the block data so order is random each time!
+            currentBlockData = shuffleArray(allIdioms.slice(start, end));
+            
+            // If last block has fewer items, adjust
+            if(currentBlockData.length === 0) {
+                alert("This block is empty!");
+                return;
+            }
+
+            // Switch to game area
+            document.getElementById('main-menu').classList.add('hidden');
+            document.getElementById('game-area').style.display = 'block';
+            document.querySelector('.back-btn').classList.remove('hidden');
+            
+            // Setup UI based on stage
+            if(isStage1) {
+                document.getElementById('stage-1-content').classList.remove('hidden');
+                document.getElementById('stage-2-content').classList.add('hidden');
             } else {
-                btnElement.classList.add('wrong');
-                resultDiv.textContent = `❌ Wrong! The correct answer is: ${question.correct}`;
-                resultDiv.className = 'result-message wrong';
+                document.getElementById('stage-1-content').classList.add('hidden');
+                document.getElementById('stage-2-content').classList.remove('hidden');
             }
             
-            updateProgress();
-            checkCompletion();
+            currentIndex = 0;
+            loadQuestion();
         }
 
-        function updateProgress() {
-            const percentage = (answeredCount / shuffledQuestions.length) * 100;
-            document.getElementById('progress-fill').style.width = percentage + '%';
-            document.getElementById('progress-text').innerHTML = 
-                `${answeredCount} / ${shuffledQuestions.length}`;
+        function goHome() {
+            document.getElementById('game-area').style.display = 'none';
+            document.getElementById('main-menu').classList.remove('hidden');
+            document.getElementById('main-menu').querySelector('.menu-grid').classList.remove('hidden');
+            document.getElementById('block-selection').classList.add('hidden');
+            document.querySelector('.back-btn').classList.add('hidden');
+            document.getElementById('completion-screen').classList.add('hidden');
         }
 
-        function checkCompletion() {
-            if (answeredCount === shuffledQuestions.length) {
-                setTimeout(() => {
-                    const finalScoreDiv = document.getElementById('finalScore');
-                    const percentage = Math.round((score / shuffledQuestions.length) * 100);
-                    let message = '';
-                    
-                    if (percentage >= 90) message = '🌟 Outstanding! You\'re an idiom master!';
-                    else if (percentage >= 70) message = '👏 Great job! Keep up the good work!';
-                    else if (percentage >= 50) message = '👍 Good effort! Keep practicing!';
-                    else message = '📚 Keep studying! You\'ll get better!';
-                    
-                    finalScoreDiv.innerHTML = `
-                        <div style="font-size: 0.8em; margin-bottom: 10px;">✨ Your Final Score ✨</div>
-                        <div style="font-size: 1.5em; margin-bottom: 10px;">${score} / ${shuffledQuestions.length}</div>
-                        <div style="font-size: 0.7em;">${percentage}%</div>
-                        <div style="margin-top: 20px; font-size: 0.6em;">${message}</div>
-                        <button class="restart-btn" onclick="restartQuiz()">🔄 Try Again</button>
-                    `;
-                    finalScoreDiv.classList.add('show');
-                    createCelebration();
-                }, 1000);
+        // Game Logic
+        function loadQuestion() {
+            if(currentIndex >= currentBlockData.length) {
+                showCompletion();
+                return;
+            }
+
+            const item = currentBlockData[currentIndex];
+            const progress = ((currentIndex) / currentBlockData.length) * 100;
+            document.getElementById('progress').style.width = progress + '%';
+
+            if(isStage1) {
+                // Stage 1: Multiple Choice
+                document.getElementById('q-definition').textContent = item.def;
+                document.getElementById('q-feedback').textContent = '';
+                document.getElementById('q-feedback').className = 'feedback';
+                document.getElementById('next-btn').classList.add('hidden');
+                
+                // Generate options (1 correct + 2 random wrong)
+                const wrongOptions = allIdioms
+                    .filter(i => i.en !== item.en)
+                    .sort(() => 0.5 - Math.random())
+                    .slice(0, 2)
+                    .map(i => i.en);
+                
+                const options = [item.en, ...wrongOptions].sort(() => 0.5 - Math.random());
+                
+                const optionsContainer = document.getElementById('q-options');
+                optionsContainer.innerHTML = '';
+                
+                options.forEach(opt => {
+                    const btn = document.createElement('button');
+                    btn.className = 'option-btn';
+                    btn.textContent = opt;
+                    btn.onclick = () => checkAnswer(opt, item.en, btn);
+                    optionsContainer.appendChild(btn);
+                });
+
+            } else {
+                // Stage 2: Translation Check
+                document.getElementById('s2-russian').textContent = item.ru;
+                document.getElementById('s2-english').textContent = item.en;
+                document.getElementById('s2-answer').style.display = 'none';
+                document.getElementById('s2-next-btn').classList.add('hidden');
             }
         }
 
-        function restartQuiz() {
-            score = 0;
-            answeredCount = 0;
-            answeredQuestions.clear();
-            document.getElementById('score').textContent = '0';
-            document.getElementById('finalScore').classList.remove('show');
-            document.getElementById('progress-fill').style.width = '0%';
-            initQuiz();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function createCelebration() {
-            for (let i = 0; i < 50; i++) {
+        function checkAnswer(selected, correct, btnElement) {
+            if(selected === correct) {
+                // Correct
+                btnElement.classList.add('correct');
+                document.getElementById('q-feedback').textContent = 'Correct!';
+                document.getElementById('q-feedback').classList.add('success');
+                
+                // Disable all buttons
+                const allBtns = document.querySelectorAll('.option-btn');
+                allBtns.forEach(b => b.disabled = true);
+                
+                document.getElementById('next-btn').classList.remove('hidden');
+            } else {
+                // Wrong
+                btnElement.classList.add('wrong');
+                document.getElementById('q-feedback').textContent = 'Try again';
+                document.getElementById('q-feedback').classList.add('try-again');
+                
+                // Remove wrong class after animation
                 setTimeout(() => {
-                    const sparkle = document.createElement('div');
-                    sparkle.className = 'sparkle';
-                    sparkle.style.left = Math.random() * 100 + 'vw';
-                    sparkle.style.top = Math.random() * 100 + 'vh';
-                    sparkle.style.animationDelay = Math.random() * 2 + 's';
-                    document.body.appendChild(sparkle);
-                    setTimeout(() => sparkle.remove(), 3000);
-                }, i * 50);
+                    btnElement.classList.remove('wrong');
+                }, 500);
             }
         }
 
-        function createBackgroundSparkles() {
-            setInterval(() => {
-                const sparkle = document.createElement('div');
-                sparkle.className = 'sparkle';
-                sparkle.style.left = Math.random() * 100 + 'vw';
-                sparkle.style.top = Math.random() * 100 + 'vh';
-                sparkle.style.width = Math.random() * 10 + 5 + 'px';
-                sparkle.style.height = sparkle.style.width;
-                document.body.appendChild(sparkle);
-                setTimeout(() => sparkle.remove(), 3000);
-            }, 500);
+        function checkTranslation() {
+            document.getElementById('s2-answer').style.display = 'block';
+            document.getElementById('s2-next-btn').classList.remove('hidden');
         }
 
-        window.onload = function() {
-            initQuiz();
-            createBackgroundSparkles();
-        };
+        function nextQuestion() {
+            currentIndex++;
+            loadQuestion();
+        }
+
+        function showCompletion() {
+            document.getElementById('stage-1-content').classList.add('hidden');
+            document.getElementById('stage-2-content').classList.add('hidden');
+            document.getElementById('completion-screen').classList.remove('hidden');
+            document.getElementById('progress').style.width = '100%';
+        }
+
+        // Start
+        init();
+
     </script>
 </body>
 </html>
